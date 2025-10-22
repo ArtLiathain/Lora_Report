@@ -85,12 +85,12 @@ This method of training allows a small dataset to impact the results of a larger
 == LoRA Fine Tuning
 
 While traditional fine-tuning updates all parameters of a pre-trained model, 
-LoRA (Low-Rank Adaptation), introduced in 2021 (Hu, Shen, Wallis, Allen-Zhu, Li, Wang & Chen), 
+LoRA (Low-Rank Adaptation), introduced in 2021 @hu_lora_2021 (Hu, Shen, Wallis, Allen-Zhu, Li, Wang & Chen), 
 takes a more efficient approach by freezing the original model weights and 
 introducing a small number of additional trainable parameters. This design 
 drastically reduces the computational and memory requirements of model adaptation.
 
-Instead of using a weight update of $d^2$ like in Fine Tuning, LoRA modifies 
+Instead of using a weight update of $d^2$ like in Fine Tuning @phd_understanding_2023, LoRA modifies 
 this process by decomposing the weight update $\ΔW$ into the product of two 
 much smaller low-rank matrices, $\A$ and $\B$, defined as:
 
@@ -139,7 +139,7 @@ This significant decrease in learnable parameters does come at a slight decrease
 #pagebreak()
 == QLoRA Fine Tuning
 Building upon LoRA's efficiency, QLoRA (Quantised Low-Rank Adaptation), 
-introduced in 2023 (Dettmers, Pagnoni, Holtzman & Zettlemoyer), further 
+introduced in 2023 @dettmers_qlora_2023 (Dettmers, Pagnoni, Holtzman & Zettlemoyer), further 
 optimises fine-tuning by combining LoRA with Quantised model weights. 
 Where LoRA freezes the original full-precision weights and trains only 
 small low-rank matrices, QLoRA first Quantises those frozen base weights 
@@ -151,7 +151,7 @@ optimised for normally distributed weights. It applies block-wise
 quantisation, normalising each block and mapping it to one of 16 
 NF4 levels. The weights are stored in this compact 4-bit form and 
 dequantised back to 16-bit only during computation, greatly reducing 
-memory use without sacrificing performance.
+memory use without sacrificing performance. @bamoria_research_2024
 
 In QLoRA, the pre-trained weight matrix $W$ is stored in a quantised 
 form $\W₄b\it$, the fine-tuning process still operates the same on 
@@ -270,4 +270,6 @@ Overall, this comparison demonstrates that while LoRa @hu_lora_2021 is still a r
 In this report, we looked at different ways to fine-tune large language models, from full parameter updates to LoRA, VeRa, and QLoRA. Each method reduces the number of trainable parameters while still keeping the model effective. VeRa stands out because it can achieve similar performance to LoRA while using only a tiny fraction of the parameters, showing how parameter-efficient fine-tuning can work in practice.
 Recent research continues to explore combining low-rank adapters with quantisation, sparsity, or optimized placements to make fine-tuning even more efficient. These approaches show that large models can adapt to new tasks faster, using less memory and compute, while maintaining performance.
 
+
+#pagebreak()
 #bibliography("references.bib")
