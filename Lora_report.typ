@@ -56,10 +56,45 @@ towards the new goal. This is still a computationally heavy process as
 every single weight is modified but as a baseline it allows for the
 adapter architecture to be used.
 
-== Lora Fine Tuning
+
+== LoRA Fine Tuning
+
+While traditional fine-tuning updates all parameters of a pre-trained model, 
+LoRA (Low-Rank Adaptation), introduced in 2021 (Hu, Shen, Wallis, Allen-Zhu, Li, Wang & Chen), 
+takes a more efficient approach by freezing the original model weights and 
+introducing a small number of additional trainable parameters. This design 
+drastically reduces the computational and memory requirements of model adaptation.
+
+Instead of using a weight update of $d^2$ like in Fine Tuning, LoRA modifies 
+this process by decomposing the weight update $\ΔW$ into the product of two 
+much smaller low-rank matrices, $\A$ and $\B$, defined as:
+
+$\W' = W + B A$
+
+where 
+
+$A$ is a matrix of $n$ multiplied by $r$ ($A = n \* r$)
+
+$B$ is a matrix of $r$ multiplied by $m$ ($B = r \* m$) 
+
+& $r$ is less than the value $d$ ($r \< d$)
+
+#figure(
+  image("images/LoRA.png")
+  , caption: [LoRA Lower Dimensionality]
+)
+
+Here, the pre-trained weights $W$ are frozen & they remain fixed during 
+training and only $A$ and $B$ are updated. This means that instead of 
+learning $d^2$ parameters, LoRA learns only $2\dr$, significantly reducing 
+the number of trainable parameters when $r$ is small. The product $\BA$ serves 
+as a low-rank approximation of $\ΔW$, capturing the essential adjustments 
+needed to specialize the model for a new task without altering the base 
+model directly.
+
+
 
 == Vera Fine Tuning
 
 == QLora Fine Tuning
-
 
