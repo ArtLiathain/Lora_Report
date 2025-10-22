@@ -57,6 +57,7 @@ every single weight is modified but as a baseline it allows for the
 adapter architecture to be used.
 
 
+#pagebreak()
 == LoRA Fine Tuning
 
 While traditional fine-tuning updates all parameters of a pre-trained model, 
@@ -73,11 +74,11 @@ $\W' = W + B A$
 
 where 
 
-$A$ is a matrix of $n$ multiplied by $r$ ($A = n \* r$)
+$A$ is a matrix of $n$ rows multiplied by $r$ columns ($A = n \* r$)
 
-$B$ is a matrix of $r$ multiplied by $m$ ($B = r \* m$) 
+$B$ is a matrix of $r$ rows multiplied by $m$ columns ($B = r \* m$) 
 
-& $r$ is less than the value $d$ ($r \< d$)
+$r$ is much smaller than $d$ ($r \<< d$)
 
 #figure(
   image("images/LoRA.png")
@@ -93,8 +94,58 @@ needed to specialize the model for a new task without altering the base
 model directly.
 
 
-
+#pagebreak()
 == Vera Fine Tuning
 
-== QLora Fine Tuning
+
+
+#pagebreak()
+== QLoRA Fine Tuning
+Building upon LoRA's efficiency, QLoRA (Quantised Low-Rank Adaptation), 
+introduced in 2023 (Dettmers, Pagnoni, Holtzman & Zettlemoyer), further 
+optimises fine-tuning by combining LoRA with Quantised model weights. 
+Where LoRA freezes the original full-precision weights and trains only 
+small low-rank matrices, QLoRA first Quantises those frozen base weights 
+to a 4-bit representation, drastically reducing memory usage while 
+maintaining model performance. 
+
+QLoRA uses a 4-bit data type called NormalFloat (NF4), which is 
+optimised for normally distributed weights. It applies block-wise 
+quantisation, normalising each block and mapping it to one of 16 
+NF4 levels. The weights are stored in this compact 4-bit form and 
+dequantised back to 16-bit only during computation, greatly reducing 
+memory use without sacrificing performance.
+
+In QLoRA, the pre-trained weight matrix $W$ is stored in a quantised 
+form $\W₄b\it$, the fine-tuning process still operates the same on 
+low-rank adapters $A$ and $B$, as in LoRA:
+
+$\W' = \W₄b\it \+ B\*A$
+
+where 
+
+$A$ is a matrix of $n$ rows multiplied by $r$ columns ($A = n \* r$)
+
+$B$ is a matrix of $r$ rows multiplied by $m$ columns ($B = r \* m$) 
+
+$r$ is much smaller than $d$ ($r \<< d$)
+
+#figure(
+  image("images/QLoRA3.png")
+  , caption: [Full, LoRA, QLoRA, Fine-Tuning Comparision]
+)
+
+
+The quantised weights $\W₄b\it$ remain frozen, and only the adapter 
+matrices $A$ and $B$ are updated through backpropagation. 
+Because quantisation compresses $W$ into a 4-bit format and LoRA 
+limits the trainable parameters to $2\dr$, QLoRA achieves extreme 
+memory efficiency
+These improvements allow QLoRA to maintain full 16-bit fine-tuning 
+performance while using a fraction of the memory and compute resources. 
+
+Because quantization compresses $W$ into a 4-bit format and LoRA 
+limits the trainable parameters to $2\dr$, QLoRA achieves extreme 
+memory efficiency, while still maintaining full 16-bit fine-tuning 
+performance, using only a fraction of memory and compute resources.
 
