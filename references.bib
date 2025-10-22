@@ -1,22 +1,112 @@
-\@misc{howard2018universallanguagemodelfinetuning,
 
-title={Universal Language Model Fine-tuning for Text Classification},
-
-author={Jeremy Howard and Sebastian Ruder},
-
-year={2018},
-
-eprint={1801.06146},
-
-archivePrefix={arXiv},
-
-primaryClass={cs.CL},
-
-url={https://arxiv.org/abs/1801.06146},
-
+@online{noauthor_how_2025,
+	title = {How Many Parameters does {GPT}-5 have - {CometAPI} - All {AI} Models in One {API}},
+	url = {https://www.cometapi.com/how-many-parameters-does-gpt-5-have/},
+	abstract = {{OpenAI} has not published an official parameter count for {GPT}-5 — from around 1.7–1.8 trillion parameters (dense-model style estimates) to tens of trillions if},
+	urldate = {2025-10-22},
+	date = {2025-10-18},
+	langid = {american},
+	note = {Section: Technology},
+	file = {Snapshot:/home/art/Zotero/storage/TBM8FTVF/how-many-parameters-does-gpt-5-have.html:text/html},
 }
 
-<https://www.cometapi.com/how-many-parameters-does-gpt-5-have/>
+@online{turner_fine_2025,
+	title = {Fine tuning Hugging Face {LLM}’s with {QLoRA}},
+	url = {https://medium.com/@clturner23/fine-tuning-hugging-face-llms-with-qlora-31be90a49a41},
+	abstract = {Most of us have used, or at least seen, the power of large language models like {ChatGPT}, Grok, and others. Their ability to answer…},
+	titleaddon = {Medium},
+	author = {Turner, Chris},
+	urldate = {2025-10-22},
+	date = {2025-06-03},
+	langid = {english},
+	file = {Snapshot:/home/art/Zotero/storage/3CLD2WG2/fine-tuning-hugging-face-llms-with-qlora-31be90a49a41.html:text/html},
+}
 
-<https://medium.com/@clturner23/fine-tuning-hugging-face-llms-with-qlora-31be90a49a41>
-(images)
+@misc{howard_universal_2018,
+	title = {Universal Language Model Fine-tuning for Text Classification},
+	url = {http://arxiv.org/abs/1801.06146},
+	doi = {10.48550/arXiv.1801.06146},
+	abstract = {Inductive transfer learning has greatly impacted computer vision, but existing approaches in {NLP} still require task-specific modifications and training from scratch. We propose Universal Language Model Fine-tuning ({ULMFiT}), an effective transfer learning method that can be applied to any task in {NLP}, and introduce techniques that are key for fine-tuning a language model. Our method significantly outperforms the state-of-the-art on six text classification tasks, reducing the error by 18-24\% on the majority of datasets. Furthermore, with only 100 labeled examples, it matches the performance of training from scratch on 100x more data. We open-source our pretrained models and code.},
+	number = {{arXiv}:1801.06146},
+	publisher = {{arXiv}},
+	author = {Howard, Jeremy and Ruder, Sebastian},
+	urldate = {2025-10-22},
+	date = {2018-05-23},
+	eprinttype = {arxiv},
+	eprint = {1801.06146 [cs]},
+	keywords = {Computer Science - Computation and Language, Computer Science - Machine Learning, Statistics - Machine Learning},
+	file = {Preprint PDF:/home/art/Zotero/storage/MPXVXDX7/Howard and Ruder - 2018 - Universal Language Model Fine-tuning for Text Classification.pdf:application/pdf;Snapshot:/home/art/Zotero/storage/GWGTVMIE/1801.html:text/html},
+}
+
+@misc{sanh_distilbert_2020,
+	title = {{DistilBERT}, a distilled version of {BERT}: smaller, faster, cheaper and lighter},
+	url = {http://arxiv.org/abs/1910.01108},
+	doi = {10.48550/arXiv.1910.01108},
+	shorttitle = {{DistilBERT}, a distilled version of {BERT}},
+	abstract = {As Transfer Learning from large-scale pre-trained models becomes more prevalent in Natural Language Processing ({NLP}), operating these large models in on-the-edge and/or under constrained computational training or inference budgets remains challenging. In this work, we propose a method to pre-train a smaller general-purpose language representation model, called {DistilBERT}, which can then be fine-tuned with good performances on a wide range of tasks like its larger counterparts. While most prior work investigated the use of distillation for building task-specific models, we leverage knowledge distillation during the pre-training phase and show that it is possible to reduce the size of a {BERT} model by 40\%, while retaining 97\% of its language understanding capabilities and being 60\% faster. To leverage the inductive biases learned by larger models during pre-training, we introduce a triple loss combining language modeling, distillation and cosine-distance losses. Our smaller, faster and lighter model is cheaper to pre-train and we demonstrate its capabilities for on-device computations in a proof-of-concept experiment and a comparative on-device study.},
+	number = {{arXiv}:1910.01108},
+	publisher = {{arXiv}},
+	author = {Sanh, Victor and Debut, Lysandre and Chaumond, Julien and Wolf, Thomas},
+	urldate = {2025-10-22},
+	date = {2020-03-01},
+	eprinttype = {arxiv},
+	eprint = {1910.01108 [cs]},
+	keywords = {Computer Science - Computation and Language},
+	file = {Preprint PDF:/home/art/Zotero/storage/43ZFSCQP/Sanh et al. - 2020 - DistilBERT, a distilled version of BERT smaller, faster, cheaper and lighter.pdf:application/pdf;Snapshot:/home/art/Zotero/storage/A9UCZ5HU/1910.html:text/html},
+}
+
+@misc{devlin_bert_2019,
+	title = {{BERT}: Pre-training of Deep Bidirectional Transformers for Language Understanding},
+	url = {http://arxiv.org/abs/1810.04805},
+	doi = {10.48550/arXiv.1810.04805},
+	shorttitle = {{BERT}},
+	abstract = {We introduce a new language representation model called {BERT}, which stands for Bidirectional Encoder Representations from Transformers. Unlike recent language representation models, {BERT} is designed to pre-train deep bidirectional representations from unlabeled text by jointly conditioning on both left and right context in all layers. As a result, the pre-trained {BERT} model can be fine-tuned with just one additional output layer to create state-of-the-art models for a wide range of tasks, such as question answering and language inference, without substantial task-specific architecture modifications. {BERT} is conceptually simple and empirically powerful. It obtains new state-of-the-art results on eleven natural language processing tasks, including pushing the {GLUE} score to 80.5\% (7.7\% point absolute improvement), {MultiNLI} accuracy to 86.7\% (4.6\% absolute improvement), {SQuAD} v1.1 question answering Test F1 to 93.2 (1.5 point absolute improvement) and {SQuAD} v2.0 Test F1 to 83.1 (5.1 point absolute improvement).},
+	number = {{arXiv}:1810.04805},
+	publisher = {{arXiv}},
+	author = {Devlin, Jacob and Chang, Ming-Wei and Lee, Kenton and Toutanova, Kristina},
+	urldate = {2025-10-22},
+	date = {2019-05-24},
+	eprinttype = {arxiv},
+	eprint = {1810.04805 [cs]},
+	keywords = {Computer Science - Computation and Language},
+	file = {Preprint PDF:/home/art/Zotero/storage/DLUSZMJ8/Devlin et al. - 2019 - BERT Pre-training of Deep Bidirectional Transformers for Language Understanding.pdf:application/pdf;Snapshot:/home/art/Zotero/storage/STEG6RJD/1810.html:text/html},
+}
+
+@misc{kopiczko_vera_2024,
+	title = {{VeRA}: Vector-based Random Matrix Adaptation},
+	url = {http://arxiv.org/abs/2310.11454},
+	doi = {10.48550/arXiv.2310.11454},
+	shorttitle = {{VeRA}},
+	abstract = {Low-rank adapation ({LoRA}) is a popular method that reduces the number of trainable parameters when finetuning large language models, but still faces acute storage challenges when scaling to even larger models or deploying numerous peruser or per-task adapted models. In this work, we present Vector-based Random Matrix Adaptation ({VeRA}), which significantly reduces the number of trainable parameters compared to {LoRA}, yet maintains the same performance. It achieves this by using a single pair of low-rank matrices shared across all layers and learning small scaling vectors instead. We demonstrate its effectiveness on the {GLUE} and E2E benchmarks, image classification tasks, and show its application in instruction-tuning of 7B and 13B language models.},
+	number = {{arXiv}:2310.11454},
+	publisher = {{arXiv}},
+	author = {Kopiczko, Dawid J. and Blankevoort, Tijmen and Asano, Yuki M.},
+	urldate = {2025-10-22},
+	date = {2024-01-16},
+	langid = {english},
+	eprinttype = {arxiv},
+	eprint = {2310.11454 [cs]},
+	keywords = {Computer Science - Computation and Language},
+	file = {PDF:/home/art/Zotero/storage/TJ3B3HJB/Kopiczko et al. - 2024 - VeRA Vector-based Random Matrix Adaptation.pdf:application/pdf},
+}
+
+@online{phd_understanding_2023,
+	title = {Understanding {LoRA} — Low Rank Adaptation For Finetuning Large Models},
+	url = {https://medium.com/data-science/understanding-lora-low-rank-adaptation-for-finetuning-large-models-936bce1a07c6},
+	abstract = {Fine-tuning large pre-trained models is computationally challenging, often involving adjustment of millions of parameters. This…},
+	titleaddon = {{TDS} Archive},
+	author = {Ph.D, Bhavin Jawade},
+	urldate = {2025-10-22},
+	date = {2023-12-27},
+	langid = {english},
+	file = {Snapshot:/home/art/Zotero/storage/6T8NE4UC/understanding-lora-low-rank-adaptation-for-finetuning-large-models-936bce1a07c6.html:text/html},
+}
+
+@book{hu_lora_2021,
+	title = {{LoRA}: Low-Rank Adaptation of Large Language Models},
+	shorttitle = {{LoRA}},
+	abstract = {The dominant paradigm of natural language processing consists of large-scale pre-training on general domain data and adaptation to particular tasks or domains. As we pre-train larger models, conventional fine-tuning, which retrains all model parameters, becomes less feasible. Using {GPT}-3 175B as an example, deploying many independent instances of fine-tuned models, each with 175B parameters, is extremely expensive. We propose Low-Rank Adaptation, or {LoRA}, which freezes the pre-trained model weights and injects trainable rank decomposition matrices into each layer of the Transformer architecture, greatly reducing the number of trainable parameters for downstream tasks. For {GPT}-3, {LoRA} can reduce the number of trainable parameters by 10,000 times and the computation hardware requirement by 3 times compared to full fine-tuning. {LoRA} performs on-par or better than fine-tuning in model quality on both {GPT}-3 and {GPT}-2, despite having fewer trainable parameters, a higher training throughput, and no additional inference latency. We also provide an empirical investigation into rank-deficiency in language model adaptations, which sheds light on the efficacy of {LoRA}. We release our implementation in {GPT}-2 at https://github.com/microsoft/{LoRA} .},
+	author = {Hu, Edward and Shen, Yelong and Wallis, Phillip and Allen-Zhu, Zeyuan and Li, Yuanzhi and Wang, Shean and Chen, Weizhu},
+	date = {2021-06-17},
+	doi = {10.48550/arXiv.2106.09685},
+}
