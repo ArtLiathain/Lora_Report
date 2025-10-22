@@ -180,16 +180,44 @@ performance while using a fraction of the memory and compute resources.
 
 
 == Lora vs Full fine tuning
-Full fine-tuning updated all 66,955,779 parameters (100% of the model) and took 372.3 seconds of training time, achieving a validation accuracy of 84.2%. In contrast, LoRA updated only 1,181,955 parameters (1.73% of the model), using a rank of 64 for the adapter matrices, which drastically reduces the number of trainable parameters. 
+The hyperparameters used for the comparison are:
+#table(
+  columns: (auto, auto, auto, auto, auto, auto),
+align: horizon,
+  table.header(
+    [*Model*],
+    [*lr*],
+    [*rank*],
+    [*epochs*],
+    [*batch size*],
+    [*maxlen*]
+  ),
+    [LoRA],
+    [5e-4],
+    [64],
+    [6],
+    [16],
+    [256],
+    [Regular],
+    [5e-5],
+    [64],
+    [6],
+    [16],
+    [256]
+)
+
+In the case of full fine-tuning updated all 66,955,779 parameters (100% of the model) and took 372.3 seconds of training time, achieving a validation accuracy of 84.2%. In contrast, LoRA updated only 1,181,955 parameters (1.73% of the model), using a rank of 64 for the adapter matrices, which drastically reduces the number of trainable parameters.
+
+While the training time for LoRA is only slightly faster (299.3 seconds), this is because the forward pass still computes over the full set of model parameters, but the backpropagation is much faster since gradients are only computed for a small set of LoRA parameters (trainable parameters).
 #figure(
   image("images/Trainable Parameter.png", width: 90%)
   , caption: [Trainable Parameters]
-)
-While the training time for LoRA is only slightly faster (299.3 seconds), this is because the forward pass still computes over the full set of model parameters, but the backpropagation is much faster since gradients are only computed for a small set of LoRA parameters (trainable parameters). LoRA achieves a validation accuracy of 79.3% even with a large reduction in trainable parameters, only 4.9% below full fine-tuning. Overall, this comparison demonstrates that LoRA provides an improvement in parameter and memory efficiency, making it a better option for fine-tuning large models.
+) <trainable_parameters>
+LoRA achieves a validation accuracy of 79.3% even with a large reduction in trainable parameters, only 4.9% below full fine-tuning. Overall, this comparison demonstrates that LoRA provides an improvement in parameter and memory efficiency, making it a better option for fine-tuning large models.
 #figure(
   image("images/Validation Accuracy.png", width: 90%)
-  , caption: [Trainable Parameters]
-)
+  , caption: [Validation Accuracy]
+) <validation_accuracy>
 
 
 == Lora Innovation Vera
@@ -225,13 +253,13 @@ align: horizon,
 
 These are not optimal hyper parameters for these models but they allow for a comparison to be performed.
 
-The key comparison is between trainable parameters. As seen in \@referencehere there is a huge disparity between regular fine tuning and LoRa.
+The key comparison is between trainable parameters. As seen in @trainable_parameters there is a huge disparity between regular fine tuning and LoRa.
 There is a similar decrease in trainable parameters between VeRa and LoRa as well. 
 
 Lora has 1.1 million parameters, and VeRa has 12 thousand, there is a 900x difference in learnable parameter count.
 This significant decrease is monumental as VeRa only needs 0.02% of the trainable parameters to train the entire model.
 
-This decrease does come with a slight reduction in accuracy, going from 79% to 72% in our findings \@referencehere.
+This decrease does come with a slight reduction in accuracy, going from 79% to 72% in our findings @validation_accuracy
 This is something that while important, is not an issue as with larger models the decrease in parameters will allow for significantly more epochs with the same compute allowing VeRa to outperform LoRa.
 
 Overall, this comparison demonstrates that while LoRa @hu_lora_2021 is still a relatively new technology, the derivative methods such as VeRa @kopiczko_vera_2024 continue to push the boundaries of parameter-efficient fine-tuning, enabling high performance with dramatically reduced memory and compute requirements.
