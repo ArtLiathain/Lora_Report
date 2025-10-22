@@ -1,6 +1,22 @@
 #set math.equation(numbering: "1.")
 
+#set page(width: 210mm, height: 297mm, margin: 25mm)
+#set heading(numbering: "1.")
+#import "@preview/pintorita:0.1.4"
+#show raw.where(lang: "pintora"): it => pintorita.render(it.text)
+
 = Fine-Tuning Pretrained Large Language Models 
+= Table of Contents
+#outline()
+
+#outline(
+  title: [List of Figures],
+  target: figure.where(kind: image)
+)
+
+
+#pagebreak()
+
 
 
 == Training LLMs
@@ -12,10 +28,6 @@ queries. A more specifically trained model is needed to allow for
 accurate domain specific responses. Recreating the model for each task
 in this case is highly inefficient and would lead to bloated systems
 with many AIs. As every task would require its own fully trained model.
-#figure(
-  image("images/2025-10-22-12:39:20.png"),
-  caption : [One model for every task]
-)
 
 = Adapter Architecture
 
@@ -27,7 +39,7 @@ model that allows the LLM to have its weights altered only by the
 adapter letting it be a plug and play solution, The matematical
 representation of this is at a high level:
 
-#figure(image("images/Base_model_fine_tuning.png", width: 60%), caption: [Fine tuning diagram])
+#figure(image("images/Base_model_fine_tuning.png", width: 40%), caption: [Fine tuning diagram])
 
 $ \min L(D; W.x + Δ W.x) $ <fine_tune_explained>
 
@@ -43,9 +55,11 @@ $ \min L(D; W.x + Δ W.x) $ <fine_tune_explained>
     as the weights are not integrated into the base model.
 
 #figure(
-  image("images/2025-10-22-12:39:26.png", width:60%)
-  , caption: [Adapter pattern]
+  image("images/2025-10-22-12:39:26.png"),
+  caption : [Adapter Architecture]
 )
+
+
 = Fine Tuning approaches
 
 == Full Parameter Fine tuning
@@ -62,14 +76,11 @@ $ \min L(D; W.x + Δ W.x) $
 The size of matrix θ₀ and Δθ are both m \* n where m and n represent the rows and columns in θ₀. The rest of the definitions are here @fine_tune_explained.
 This method of training allows a small dataset to impact the results of a larger model removing the need to train the model on a huge corpus of data to get tangible results. This being the first step that allowed for fine tuning to be brought forward into conversation for all models.
 
-
 #figure(
   image("images/QLoRA2.png")
   , caption: [Full, LoRA, QLoRA, Fine-Tuning Comparision @noauthor_parameter-efficient_nodate]
 )
 
-
-=======
 #pagebreak()
 == LoRA Fine Tuning
 
@@ -186,7 +197,54 @@ show that LoRA greatly improves efficiency while still achieving
 competitive performance, making it an effective option for fine-tuning 
 large models.
 
-== Lora Vs Vera
+== Lora Innovation Vera
+Lora @hu_lora_2021 is a new technology, but it has ushered in a golden age of fine-tuning models.
+A strong contender to replace LoRa is VeRa @kopiczko_vera_2024.
+
+For our comparison, the following hyperparameters were used, and the dataset \@referencehere was used:
+
+#table(
+  columns: (auto, auto, auto, auto, auto, auto),
+align: horizon,
+  table.header(
+    [*Model*],
+    [*lr*],
+    [*rank*],
+    [*epochs*],
+    [*batch size*],
+    [*maxlen*]
+  ),
+    [LoRA],
+    [5e-4],
+    [64],
+    [6],
+    [16],
+    [256],
+    [VeRa],
+    [1e-3],
+    [64],
+    [6],
+    [16],
+    [256]
+)
+
+These are not optimal hyper parameters for these models but they allow for a comparison to be performed.
+
+The key comparison is between trainable parameters. As seen in \@referencehere there is a huge disparity between regular fine tuning and LoRa.
+There is a similar decrease in trainable parameters between VeRa and LoRa as well. 
+
+Lora has 1.1 million parameters, and VeRa has 12 thousand, there is a 900x difference in learnable parameter count.
+This significant decrease is monumental as VeRa only needs 0.02% of the trainable parameters to train the entire model.
+
+This decrease does come with a slight reduction in accuracy**, going from 79% to 72% in our findings \@referencehere.
+This is something that while important, is not an issue as with larger models the decrease in parameters will allow for significantly more epochs with the same compute allowing VeRa to outperform LoRa.
+
+Overall, this comparison demonstrates that while LoRa @hu_lora_2021 is still a relatively new technology, the derivative methods such as VeRa @kopiczko_vera_2024 continue to push the boundaries of parameter-efficient fine-tuning, enabling high performance with dramatically reduced memory and compute requirements.
+
+
+
+== Conclusion
+
+
 
 #bibliography("references.bib")
-=======
