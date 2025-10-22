@@ -76,7 +76,12 @@ $ \min L(D; W.x + Δ W.x) $
 The size of matrix θ₀ and Δθ are both m \* n where m and n represent the rows and columns in θ₀. The rest of the definitions are here @fine_tune_explained.
 This method of training allows a small dataset to impact the results of a larger model removing the need to train the model on a huge corpus of data to get tangible results. This being the first step that allowed for fine tuning to be brought forward into conversation for all models.
 
+#figure(
+  image("images/QLoRA2.png")
+  , caption: [Full, LoRA, QLoRA, Fine-Tuning Comparision @noauthor_parameter-efficient_nodate]
+)
 
+#pagebreak()
 == LoRA Fine Tuning
 
 While traditional fine-tuning updates all parameters of a pre-trained model, 
@@ -99,10 +104,7 @@ $B$ is a matrix of $r$ rows multiplied by $m$ columns ($B = r \* m$)
 
 $r$ is much smaller than $d$ ($r \<< d$)
 
-#figure(
-  image("images/LoRA.png")
-  , caption: [LoRA Lower Dimensionality]
-)
+There's visualisation of there here: @noauthor_parameter-efficient_nodate
 
 Here, the pre-trained weights $W$ are frozen & they remain fixed during 
 training and only $A$ and $B$ are updated. This means that instead of 
@@ -166,10 +168,7 @@ $B$ is a matrix of $r$ rows multiplied by $m$ columns ($B = r \* m$)
 
 $r$ is much smaller than $d$ ($r \<< d$)
 
-#figure(
-  image("images/QLoRA3.png")
-  , caption: [Full, LoRA, QLoRA, Fine-Tuning Comparision]
-)
+There's visualisation of there here: @noauthor_parameter-efficient_nodate
 
 
 The quantised weights $\W₄b\it$ remain frozen, and only the adapter 
@@ -180,12 +179,23 @@ memory efficiency
 These improvements allow QLoRA to maintain full 16-bit fine-tuning 
 performance while using a fraction of the memory and compute resources. 
 
-Because quantization compresses $W$ into a 4-bit format and LoRA 
-limits the trainable parameters to $2\dr$, QLoRA achieves extreme 
-memory efficiency, while still maintaining full 16-bit fine-tuning 
-performance, using only a fraction of memory and compute resources.
 
 == Lora vs Full fine tuning
+Full fine-tuning updated all 66,955,779 parameters (100% of the model) 
+and required an average of 2.75GB of GPU memory and 372.3 seconds 
+of training time, achieving a validation accuracy of 84.2%. In 
+contrast, LoRA updated only 1,181,955 parameters (1.73% of the model), 
+using a rank of 64 for the adapter matrices, which drastically reduces 
+the number of trainable parameters. This reduced memory usage to an 
+average of 1.875GB and the training time to 299.3 seconds, with a 
+lower validation accuracy of 79.3%. It's noticable that the memory 
+difference is smaller than expected as there's a major difference in 
+the amount of trainable parameters, this is likely due to Colab's 
+environmental setup, where performance caching and other system 
+processes affect the reported memory usage. Even so, these results 
+show that LoRA greatly improves efficiency while still achieving 
+competitive performance, making it an effective option for fine-tuning 
+large models.
 
 == Lora Innovation Vera
 Lora @hu_lora_2021 is a new technology, but it has ushered in a golden age of fine-tuning models.
