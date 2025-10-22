@@ -180,21 +180,17 @@ performance while using a fraction of the memory and compute resources.
 
 
 == Lora vs Full fine tuning
-Full fine-tuning updated all 66,955,779 parameters (100% of the model) 
-and required an average of 2.75GB of GPU memory and 372.3 seconds 
-of training time, achieving a validation accuracy of 84.2%. In 
-contrast, LoRA updated only 1,181,955 parameters (1.73% of the model), 
-using a rank of 64 for the adapter matrices, which drastically reduces 
-the number of trainable parameters. This reduced memory usage to an 
-average of 1.875GB and the training time to 299.3 seconds, with a 
-lower validation accuracy of 79.3%. It's noticable that the memory 
-difference is smaller than expected as there's a major difference in 
-the amount of trainable parameters, this is likely due to Colab's 
-environmental setup, where performance caching and other system 
-processes affect the reported memory usage. Even so, these results 
-show that LoRA greatly improves efficiency while still achieving 
-competitive performance, making it an effective option for fine-tuning 
-large models.
+Full fine-tuning updated all 66,955,779 parameters (100% of the model) and took 372.3 seconds of training time, achieving a validation accuracy of 84.2%. In contrast, LoRA updated only 1,181,955 parameters (1.73% of the model), using a rank of 64 for the adapter matrices, which drastically reduces the number of trainable parameters. 
+#figure(
+  image("images/Trainable Parameter.png", width: 90%)
+  , caption: [Trainable Parameters]
+)
+While the training time for LoRA is only slightly faster (299.3 seconds), this is because the forward pass still computes over the full set of model parameters, but the backpropagation is much faster since gradients are only computed for a small set of LoRA parameters (trainable parameters). LoRA achieves a validation accuracy of 79.3% even with a large reduction in trainable parameters, only 4.9% below full fine-tuning. Overall, this comparison demonstrates that LoRA provides an improvement in parameter and memory efficiency, making it a better option for fine-tuning large models.
+#figure(
+  image("images/Validation Accuracy.png", width: 90%)
+  , caption: [Trainable Parameters]
+)
+
 
 == Lora Innovation Vera
 Lora @hu_lora_2021 is a new technology, but it has ushered in a golden age of fine-tuning models.
