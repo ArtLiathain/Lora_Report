@@ -115,7 +115,6 @@ needed to specialize the model for a new task without altering the base
 model directly.
 
 
-#pagebreak()
 == Vera Fine Tuning
 Vera @kopiczko_vera_2024 fine-tuning is an innovation built on top of LoRA, designed to decrease the memory overhead associated with parameter-efficient fine-tuning.
 The core of the method is based on Random Matrix Adaptation and LoRa. 
@@ -236,7 +235,7 @@ There is a similar decrease in trainable parameters between VeRa and LoRa as wel
 Lora has 1.1 million parameters, and VeRa has 12 thousand, there is a 900x difference in learnable parameter count.
 This significant decrease is monumental as VeRa only needs 0.02% of the trainable parameters to train the entire model.
 
-This decrease does come with a slight reduction in accuracy**, going from 79% to 72% in our findings \@referencehere.
+This decrease does come with a slight reduction in accuracy, going from 79% to 72% in our findings \@referencehere.
 This is something that while important, is not an issue as with larger models the decrease in parameters will allow for significantly more epochs with the same compute allowing VeRa to outperform LoRa.
 
 Overall, this comparison demonstrates that while LoRa @hu_lora_2021 is still a relatively new technology, the derivative methods such as VeRa @kopiczko_vera_2024 continue to push the boundaries of parameter-efficient fine-tuning, enabling high performance with dramatically reduced memory and compute requirements.
