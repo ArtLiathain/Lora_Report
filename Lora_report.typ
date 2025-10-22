@@ -60,26 +60,30 @@ $ \min L(D; W.x + Δ W.x) $
 
 
 The size of matrix θ₀ and Δθ are both m \* n where m and n represent the rows and columns in θ₀. The rest of the definitions are here @fine_tune_explained.
-This method of training allows a small dataset to impact the results of a larger model removing the need to train the model on a huge corpus of data to get tangible results.
+This method of training allows a small dataset to impact the results of a larger model removing the need to train the model on a huge corpus of data to get tangible results. This being the first step that allowed for fine tuning to be brought forward into conversation for all models.
 
 == Lora Fine Tuning
 
 
 == Vera Fine Tuning
-Vera @kopiczko_vera_2024 fine tuning is an innovation on LoRa fine tuning created to reduce the memory overhead in LoRa.
-The method in which it works is based on Random Matrix Adaptation and LoRa. 
-The process begins by generating two low rank matrixes of sizes m \* 
-In mathematical terms 
+Vera @kopiczko_vera_2024 fine-tuning is an innovation built on top of LoRA, designed to decrease the memory overhead associated with parameter-efficient fine-tuning.
+The core of the method is based on Random Matrix Adaptation and LoRa. 
 
-$ W.x + Δ W.x = W.x + Λ_b B Λ_d A x $
+
+Instead of learning two low rank matrices VeRa, begins by generating two low rank matrices of sizes m \* r and r \* n, which are frozen after the initial generation.
+
+Next two diagonal matrices are created of size m \* m and r \* r. These diagonal matrices scale the two low rank matrices. The method being similar to a switchboard where each value can amplify or deactivate sections in the low rank matrices without the need to store full parameter sets.
+
+In mathematical terms @kopiczko_vera_2024
+
+$ W.x + Δ W.x = W.x + Λ_b B Λ_d A x $ 
 
 - A and B:  Are randomly generated low rank matrixes of sizes m \* r and r \* n which multiply to create the W.x matrix.
 
-- Λ_b and  Λ_d: Are diagonal matrixes which are used to scale the A and B matrixes. They are of sizes m \* m and r \* r.
+- Λ_b and  Λ_d: Are diagonal matrixes which are used to scale the A and B matrices. They are of sizes m \* m and r \* r.
 
-
-The key innovation to note is the $ Λ_b B Λ_d A x$. These are diagonal scaling matrixes which scale the values of the randomly gernated A and B matrixes which emulate 
-
+Unlike traditional Lora, Vera only learns the scaling diagonal matrix values. This severely reduces the number of required parameters going from *r(m + n)* to only *m + r*.
+This significant decrease in learnable parameters does come at a slight decrease of accuracy but the sheer amount of trainable parameters decreased merits this method as a clear innovation on LoRa.
 
 == QLora Fine Tuning
 

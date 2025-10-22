@@ -110,3 +110,36 @@
 	date = {2021-06-17},
 	doi = {10.48550/arXiv.2106.09685},
 }
+
+@online{bamoria_research_2024,
+	title = {[Research Paper Summary] {QLoRA}: Efficient Finetuning of Quantized {LLMs}},
+	url = {https://medium.com/athina-ai/research-paper-summary-qlora-efficient-finetuning-of-quantized-llms-8bbc2a2ff260},
+	shorttitle = {[Research Paper Summary] {QLoRA}},
+	abstract = {Original Paper: https://arxiv.org/abs/2305.14314},
+	titleaddon = {Athina {AI}},
+	author = {Bamoria, Himanshu},
+	urldate = {2025-10-22},
+	date = {2024-11-04},
+	langid = {english},
+	file = {Snapshot:/home/art/Zotero/storage/I3GBNV5R/research-paper-summary-qlora-efficient-finetuning-of-quantized-llms-8bbc2a2ff260.html:text/html},
+}
+
+@book{dettmers_qlora_2023,
+	title = {{QLoRA}: Efficient Finetuning of Quantized {LLMs}},
+	shorttitle = {{QLoRA}},
+	abstract = {We present {QLoRA}, an efficient finetuning approach that reduces memory usage enough to finetune a 65B parameter model on a single 48GB {GPU} while preserving full 16-bit finetuning task performance. {QLoRA} backpropagates gradients through a frozen, 4-bit quantized pretrained language model into Low Rank Adapters{\textasciitilde}({LoRA}). Our best model family, which we name Guanaco, outperforms all previous openly released models on the Vicuna benchmark, reaching 99.3\% of the performance level of {ChatGPT} while only requiring 24 hours of finetuning on a single {GPU}. {QLoRA} introduces a number of innovations to save memory without sacrificing performance: (a) 4-bit {NormalFloat} ({NF}4), a new data type that is information theoretically optimal for normally distributed weights (b) double quantization to reduce the average memory footprint by quantizing the quantization constants, and (c) paged optimziers to manage memory spikes. We use {QLoRA} to finetune more than 1,000 models, providing a detailed analysis of instruction following and chatbot performance across 8 instruction datasets, multiple model types ({LLaMA}, T5), and model scales that would be infeasible to run with regular finetuning (e.g. 33B and 65B parameter models). Our results show that {QLoRA} finetuning on a small high-quality dataset leads to state-of-the-art results, even when using smaller models than the previous {SoTA}. We provide a detailed analysis of chatbot performance based on both human and {GPT}-4 evaluations showing that {GPT}-4 evaluations are a cheap and reasonable alternative to human evaluation. Furthermore, we find that current chatbot benchmarks are not trustworthy to accurately evaluate the performance levels of chatbots. A lemon-picked analysis demonstrates where Guanaco fails compared to {ChatGPT}. We release all of our models and code, including {CUDA} kernels for 4-bit training.},
+	author = {Dettmers, Tim and Pagnoni, Artidoro and Holtzman, Ari and Zettlemoyer, Luke},
+	date = {2023-05-23},
+	doi = {10.48550/arXiv.2305.14314},
+}
+
+@online{noauthor_parameter-efficient_nodate,
+	title = {Parameter-efficient fine-tuning: {LoRA} and {QLoRA} compared to {FFT}.},
+	url = {https://www.researchgate.net/figure/Parameter-efficient-fine-tuning-LoRA-and-QLoRA-compared-to-FFT_fig2_390192224},
+	shorttitle = {Parameter-efficient fine-tuning},
+	abstract = {Download scientific diagram {\textbar} Parameter-efficient fine-tuning: {LoRA} and {QLoRA} compared to {FFT}. from publication: {ATIRS}: Towards Adaptive Threat Analysis with Intelligent Log Summarization and Response Recommendation {\textbar} Modern maritime operations rely on diverse network components, increasing cybersecurity risks. While security solutions like Suricata generate extensive network alert logs, ships often operate without dedicated security personnel, requiring general crew members to review and... {\textbar} Summarization, Maritime and Intelligence {\textbar} {ResearchGate}, the professional network for scientists.},
+	titleaddon = {{ResearchGate}},
+	urldate = {2025-10-22},
+	langid = {english},
+	file = {Snapshot:/home/art/Zotero/storage/3ZM8AXDB/Parameter-efficient-fine-tuning-LoRA-and-QLoRA-compared-to-FFT_fig2_390192224.html:text/html},
+}
