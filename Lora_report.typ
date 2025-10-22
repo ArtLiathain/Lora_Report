@@ -19,7 +19,7 @@
 
 
 
-== Training LLMs
+= Training LLMs
 
 Training for an LLM is a long and compute intensive task. 
 The level of current models such as GPT5 with 1.8trillion. This initial training
@@ -36,7 +36,7 @@ architecture to take place. This approach applies an additional layer to
 the AI adapter. This adapter is a created by freezing the current model
 weights, then training an additional set of weights to act upon the base
 model that allows the LLM to have its weights altered only by the
-adapter letting it be a plug and play solution, The matematical
+adapter letting it be a plug and play solution, The mathematical
 representation of this is at a high level:
 
 #figure(image("images/Base_model_fine_tuning.png", width: 40%), caption: [Fine tuning diagram])
@@ -66,7 +66,7 @@ $ \min L(D; W.x + Δ W.x) $ <fine_tune_explained>
 
 Full parameter fine tuning approach was first proposed in 2018 @howard_universal_2018 called ULMFiT. This principle has been taken and applied in many forms to models such as DistilBERT@sanh_distilbert_2020 and BERT @devlin_bert_2019.
 The base approach is is freezing the original weights then creating a blank matrix of the model weights, then training those to scale each weight individually to bias towards the new target. 
-While efficent it is still a computationally heavy process as every single weight is modified but as a baseline it allows for the adapter architecture to be used.
+While efficient it is still a computationally heavy process as every single weight is modified but as a baseline it allows for the adapter architecture to be used.
 
 The formula used to represent this would be
 
@@ -78,7 +78,7 @@ This method of training allows a small dataset to impact the results of a larger
 
 #figure(
   image("images/QLoRA2.png")
-  , caption: [Full, LoRA, QLoRA, Fine-Tuning Comparision @noauthor_parameter-efficient_nodate]
+  , caption: [Full, LoRA, QLoRA, Fine-Tuning Comparison @noauthor_parameter-efficient_nodate]
 )
 
 #pagebreak()
@@ -96,7 +96,7 @@ much smaller low-rank matrices, $\A$ and $\B$, defined as:
 
 $\W' = W + B A$
 
-where 
+Where 
 
 $A$ is a matrix of $n$ rows multiplied by $r$ columns ($A = n \* r$)
 
@@ -128,9 +128,9 @@ In mathematical terms @kopiczko_vera_2024
 
 $ W.x + Δ W.x = W.x + Λ_b B Λ_d A x $ 
 
-- A and B:  Are randomly generated low rank matrixes of sizes m \* r and r \* n which multiply to create the W.x matrix.
+- A and B:  Are randomly generated low rank matrices of sizes m \* r and r \* n which multiply to create the W.x matrix.
 
-- Λ_b and  Λ_d: Are diagonal matrixes which are used to scale the A and B matrices. They are of sizes m \* m and r \* r.
+- Λ_b and  Λ_d: Are diagonal matrices which are used to scale the A and B matrices. They are of sizes m \* m and r \* r.
 
 Unlike traditional Lora, Vera only learns the scaling diagonal matrix values. This severely reduces the number of required parameters going from *r(m + n)* to only *m + r*.
 This significant decrease in learnable parameters does come at a slight decrease of accuracy but the sheer amount of trainable parameters decreased merits this method as a clear innovation on LoRa.
@@ -159,7 +159,7 @@ low-rank adapters $A$ and $B$, as in LoRA:
 
 $\W' = \W₄b\it \+ B\*A$
 
-where 
+Where 
 
 $A$ is a matrix of $n$ rows multiplied by $r$ columns ($A = n \* r$)
 
@@ -219,8 +219,8 @@ LoRA achieves a validation accuracy of 79.3% even with a large reduction in trai
   , caption: [Validation Accuracy]
 ) <validation_accuracy>
 
-
-== Lora Innovation Vera
+#pagebreak()
+== Lora Innovation 
 Lora @hu_lora_2021 is a new technology, but it has ushered in a golden age of fine-tuning models.
 A strong contender to replace LoRa is VeRa @kopiczko_vera_2024.
 
@@ -267,7 +267,7 @@ Overall, this comparison demonstrates that while LoRa @hu_lora_2021 is still a r
 
 
 == Conclusion
-
-
+In this report, we looked at different ways to fine-tune large language models, from full parameter updates to LoRA, VeRa, and QLoRA. Each method reduces the number of trainable parameters while still keeping the model effective. VeRa stands out because it can achieve similar performance to LoRA while using only a tiny fraction of the parameters, showing how parameter-efficient fine-tuning can work in practice.
+Recent research continues to explore combining low-rank adapters with quantisation, sparsity, or optimized placements to make fine-tuning even more efficient. These approaches show that large models can adapt to new tasks faster, using less memory and compute, while maintaining performance.
 
 #bibliography("references.bib")
