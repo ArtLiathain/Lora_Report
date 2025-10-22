@@ -1,13 +1,12 @@
-Fine-Tuning Pretrained
+#set math.equation(numbering: "1.")
 
-Large Language
+= Fine-Tuning Pretrained Large Language Models 
 
-Models
 
-Training LLMs
+== Training LLMs
 
-Training for an LLM is a long and compute intensive task. The level of
-current models such as GPT5 with 1.8trillion. This initial training
+Training for an LLM is a long and compute intensive task. 
+The level of current models such as GPT5 with 1.8trillion. This initial training
 create a generalist model that struggles with specific information and
 queries. A more specifically trained model is needed to allow for
 accurate domain specific responses. Recreating the model for each task
@@ -28,7 +27,10 @@ model that allows the LLM to have its weights altered only by the
 adapter letting it be a plug and play solution, The matematical
 representation of this is at a high level:
 
-min L(D;θ0 +Δθ)
+#figure(image("images/Base_model_fine_tuning.png", width: 60%), caption: [Fine tuning diagram])
+
+$ \min L(D; W.x + Δ W.x) $ <fine_tune_explained>
+
 
 -   L : This represents the loss function used to calculate the
     gradient that needs to be minimized for the LLM.
@@ -36,27 +38,33 @@ min L(D;θ0 +Δθ)
 -   D : This represents the dataset the loss function is being
     trained on and what is being optimized for.
 
--   Θ : θ0 represent the weights for base model and Δθ represent the
+-   Θ : θ₀ represent the weights for base model and Δθ represent the
     weights from the fine tuning. This is how the adapter is swappable
     as the weights are not integrated into the base model.
 
 #figure(
-  image("images/2025-10-22-12:39:26.png")
+  image("images/2025-10-22-12:39:26.png", width:60%)
   , caption: [Adapter pattern]
 )
 = Fine Tuning approaches
 
 == Full Parameter Fine tuning
 
-This was the first fine tuning approach proposed in 2018 (Jeremy Howar
-and Sebastian Ruder), which at the time was called ULMFiT. This is the
-simplest approach conceptually as it creates a mirror of the model
-weights and trains those to scale each weight individually to work
-towards the new goal. This is still a computationally heavy process as
-every single weight is modified but as a baseline it allows for the
-adapter architecture to be used.
+Full parameter fine tuning approach was first proposed in 2018 @howard_universal_2018 called ULMFiT. This principle has been taken and applied in many forms to models such as DistilBERT@sanh_distilbert_2020 and BERT @devlin_bert_2019.
+The base approach is is freezing the original weights then creating a blank matrix of the model weights, then training those to scale each weight individually to bias towards the new target. 
+While efficent it is still a computationally heavy process as every single weight is modified but as a baseline it allows for the adapter architecture to be used.
+
+The formula used to represent this would be
+
+$ \min L(D; W.x + Δ W.x) $
 
 
+The size of matrix θ₀ and Δθ are both m \* n where m and n represent the rows and columns in θ₀. The rest of the definitions are here @fine_tune_explained.
+This method of training allows a small dataset to impact the results of a larger model removing the need to train the model on a huge corpus of data to get tangible results. This being the first step that allowed for fine tuning to be brought forward into conversation for all models.
+
+
+
+=======
 #pagebreak()
 == LoRA Fine Tuning
 
@@ -96,7 +104,24 @@ model directly.
 
 #pagebreak()
 == Vera Fine Tuning
+Vera @kopiczko_vera_2024 fine-tuning is an innovation built on top of LoRA, designed to decrease the memory overhead associated with parameter-efficient fine-tuning.
+The core of the method is based on Random Matrix Adaptation and LoRa. 
 
+
+Instead of learning two low rank matrices VeRa, begins by generating two low rank matrices of sizes m \* r and r \* n, which are frozen after the initial generation.
+
+Next two diagonal matrices are created of size m \* m and r \* r. These diagonal matrices scale the two low rank matrices. The method being similar to a switchboard where each value can amplify or deactivate sections in the low rank matrices without the need to store full parameter sets.
+
+In mathematical terms @kopiczko_vera_2024
+
+$ W.x + Δ W.x = W.x + Λ_b B Λ_d A x $ 
+
+- A and B:  Are randomly generated low rank matrixes of sizes m \* r and r \* n which multiply to create the W.x matrix.
+
+- Λ_b and  Λ_d: Are diagonal matrixes which are used to scale the A and B matrices. They are of sizes m \* m and r \* r.
+
+Unlike traditional Lora, Vera only learns the scaling diagonal matrix values. This severely reduces the number of required parameters going from *r(m + n)* to only *m + r*.
+This significant decrease in learnable parameters does come at a slight decrease of accuracy but the sheer amount of trainable parameters decreased merits this method as a clear innovation on LoRa.
 
 
 #pagebreak()
@@ -149,3 +174,9 @@ limits the trainable parameters to $2\dr$, QLoRA achieves extreme
 memory efficiency, while still maintaining full 16-bit fine-tuning 
 performance, using only a fraction of memory and compute resources.
 
+== Lora vs Full fine tuning
+
+== Lora Vs Vera
+
+#bibliography("references.bib")
+=======
